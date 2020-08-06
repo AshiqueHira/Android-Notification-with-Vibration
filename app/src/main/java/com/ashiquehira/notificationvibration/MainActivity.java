@@ -16,7 +16,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CHANNEL_ID = "myChannel";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,41 +25,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonClick(View view){
-        notificationPops();
+        Intent intent = new Intent(this,SecondActivity.class);
+        intent.putExtra("myname","ashiqueHira");
+        startActivity(intent);
     }
 
-    public void notificationPops(){
 
-        Intent intent = new Intent(this, MainActivity.class);
-        createNotificationChannel();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_vibration_black_24dp)
-                .setContentTitle("Token Reminder")
-                .setContentText("Dismiss the Alarm by Clicking this")
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setVibrate(new long[] { 100, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000 })
-                // Set the intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, builder.build());
-    }
-
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "myChannel",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            serviceChannel.enableVibration(true);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(serviceChannel);
-        }
-    }
 
 }

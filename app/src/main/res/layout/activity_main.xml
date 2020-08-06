@@ -13,7 +13,7 @@
         android:background="#E8DDDD"
         android:onClick="buttonClick"
         android:padding="10dp"
-        android:text="show Notification"
+        android:text="Next Acitvity"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
